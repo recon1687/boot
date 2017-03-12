@@ -20,20 +20,30 @@ public class SpringHibernateMain {
 		person.setName("Michał");
 		person.setCountry("Poland");
 
-		personDAO.save(person);
+		System.out.println(personDAO.save(person));
 
 		System.out.println("Person::" + person);
-
+		int i =1;
 		personDAO.list().forEach(System.out::println);
-
+		System.out.println(personDAO.selectById(i));
 		
-
+		Person update=personDAO.selectById(i);
+		update.setName("Paweł");
+		personDAO.update(update);
+		
 		InvoiceDAO invoiceDAO = context.getBean(InvoiceDAO.class);
 		Invoice invoice = new Invoice();
 		invoice.setDok("Faktura");
+		invoice.setPerson(person);
+		
+		Invoice invoice1 = new Invoice();
+		invoice1.setDok("dokument");
+		invoice1.setPerson(person);
+		
 		
 		invoiceDAO.save(invoice);
-
+		invoiceDAO.save(invoice1);
+		
 		System.out.println("Invoice::" + invoice);
 
 		invoiceDAO.list().forEach(System.out::println);

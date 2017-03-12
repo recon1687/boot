@@ -1,10 +1,14 @@
 package it.coderunner.model;
 
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -16,6 +20,19 @@ public class Invoice
 	private int nr;
 	@Column(name="invoice")
 	private String dok;
+	@ManyToOne
+	@JoinColumn(name="id1")
+	private Person person;
+	
+	public Person getPerson()
+	{
+		return person;
+	}
+	
+	public void setPerson(Person person)
+	{
+		this.person= person;
+	}
 	
 	public int getNr() {
 		return nr;

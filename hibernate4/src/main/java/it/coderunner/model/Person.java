@@ -1,10 +1,15 @@
 package it.coderunner.model;
 
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -19,6 +24,10 @@ public class Person {
 	private String name;
 
 	private String country;
+	
+	@OneToMany(mappedBy="person")
+	private Set<Invoice> invoices;
+	
 
 	public int getId() {
 		return id;
