@@ -1,8 +1,11 @@
 package it.coderunner;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import it.coderunner.dao.InvoiceDAO;
 import it.coderunner.dao.PersonDAO;
+import it.coderunner.model.Invoice;
 import it.coderunner.model.Person;
 
 public class SpringHibernateMain {
@@ -23,8 +26,19 @@ public class SpringHibernateMain {
 
 		personDAO.list().forEach(System.out::println);
 
-		context.close();
+		
 
+		InvoiceDAO invoiceDAO = context.getBean(InvoiceDAO.class);
+		Invoice invoice = new Invoice();
+		invoice.setDok("Faktura");
+		
+		invoiceDAO.save(invoice);
+
+		System.out.println("Invoice::" + invoice);
+
+		invoiceDAO.list().forEach(System.out::println);
+
+		context.close();
 	}
 
 }

@@ -9,5 +9,5 @@ public interface PersonDAO {
 	void save(Person p);
 	
 	List<Person> list();
-	
+
 }

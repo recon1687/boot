@@ -23,7 +23,7 @@
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
 		destroy-method="close">
 		<property name="driverClassName" value="org.h2.Driver" />
-		<property name="url" value="jdbc:h2:~/wwsis" />
+		<property name="url" value="jdbc:h2:~/wwsis2" />
 		<property name="username" value="test" />
 		<property name="password" value="test" />
 	</bean>
@@ -37,6 +37,9 @@
 		class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor" />
 
 	<bean id="personDAO" class="it.coderunner.dao.impl.PersonDAOImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<bean id="invoiceDAO" class="it.coderunner.dao.impl.InvoiceDAOImpl">
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
 </beans>
