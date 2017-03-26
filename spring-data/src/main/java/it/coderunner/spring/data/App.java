@@ -7,6 +7,7 @@ import javax.sql.DataSource;
 import org.hibernate.jpa.HibernatePersistenceProvider;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.context.embedded.EmbeddedServletContainerCustomizer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
@@ -30,7 +31,7 @@ public class App {
     private static final String PROPERTY_NAME_HIBERNATE_SHOW_SQL = "true";
     private static final String PROPERTY_NAME_ENTITYMANAGER_PACKAGES_TO_SCAN = "it.coderunner.spring.data.*";
 	private static final String PROPERTY_NAME_HIBERNATE_HBM2DDL_AUTO = "update";
-    
+    	
 	public static void main(String[] args) {
 		SpringApplication.run(App.class, args);
 	}
@@ -76,4 +77,10 @@ public class App {
             return transactionManager;
     }
 	
+    @Bean
+    public EmbeddedServletContainerCustomizer containerCustomizer() {
+        return (container -> {
+            container.setPort(8090);
+        });
+    }
 }
